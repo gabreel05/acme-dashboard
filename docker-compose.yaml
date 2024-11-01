@@ -20,7 +20,7 @@ services:
   #   networks:
   #     - default
   #   environment:
-  #     - DB_HOST=172.18.0.3
+  #     - DB_HOST=localhost
   #     - DB_USER=acme
   #     - DB_PASSWORD=acme
   #     - AUTH_SECRET=FS0QpJJHztFfn+M99aUr7epssC1m0E8GUk1OMzuIkvI=
