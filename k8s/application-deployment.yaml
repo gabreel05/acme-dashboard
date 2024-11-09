@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: application
-        image: <Image>
+        image: gabreel05/acme-application:latest
         imagePullPolicy: Always
         resources:
           limits:
@@ -21,3 +21,29 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3000
+        env:
+        - name: AUTH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: auth-secret
+              key: AUTH_SECRET 
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-host
+              key: DB_HOST 
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: db-name
+              key: DB_NAME 
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-user
+              key: DB_USER 
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-password
+              key: DB_PASSWORD

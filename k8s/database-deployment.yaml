@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+spec:
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - name: database
+        image: gabreel05/acme-database:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-database
+              key: MYSQL_DATABASE 
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-root-password
+              key: MYSQL_ROOT_PASSWORD 
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-user
+              key: MYSQL_USER 
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-password
+              key: MYSQL_PASSWORD
+    volumes:
+    - name: database-storage
+      persistanceVolumeClaim: database-pvc
