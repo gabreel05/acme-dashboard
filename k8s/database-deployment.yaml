@@ -24,22 +24,22 @@ spec:
         - name: MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
-              name: mysql-database
+              name: MYSQL_DATABASE
               key: MYSQL_DATABASE 
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-root-password
+              name: MYSQL_ROOT_PASSWORD
               key: MYSQL_ROOT_PASSWORD 
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
-              name: mysql-user
+              name: MYSQL_USER
               key: MYSQL_USER 
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-password
+              name: MYSQL_PASSWORD
               key: MYSQL_PASSWORD
       volumes:
       - name: database-storage
