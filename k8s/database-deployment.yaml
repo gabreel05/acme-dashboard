@@ -20,9 +20,6 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3306
-        volumeMounts:
-        - name: database-storage
-          mountPath: /var/lib/mysql
         env:
         - name: MYSQL_DATABASE
           valueFrom:
@@ -44,6 +41,9 @@ spec:
             secretKeyRef:
               name: database-secrets
               key: MYSQL_PASSWORD
+        volumeMounts:
+        - name: database-storage
+          mountPath: /var/lib/mysql
       volumes:
       - name: database-storage
         persistentVolumeClaim:
