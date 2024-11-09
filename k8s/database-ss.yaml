@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: database
-  serviceName: "database"
+  serviceName: "database-service"
   replicas: 1
   template:
     metadata:
