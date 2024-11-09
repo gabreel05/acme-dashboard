@@ -43,4 +43,5 @@ spec:
               key: MYSQL_PASSWORD
       volumes:
       - name: database-storage
-        persistentVolumeClaim: database-pvc
+        persistentVolumeClaim:
+          claimName: database-pvc
