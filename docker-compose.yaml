@@ -19,6 +19,7 @@ services:
     networks:
       - default
     environment:
+      - DB_URL=mysql://root:acme@database/acme
       - DB_HOST=localhost
       - DB_USER=acme
       - DB_PASSWORD=acme
