@@ -1,13 +1,5 @@
 import knex from '@/knex';
-import {
-  CustomerField,
-  CustomersTableType,
-  InvoiceForm,
-  InvoicesTable,
-  LatestInvoiceRaw,
-  User,
-  Revenue,
-} from './definitions';
+import { User } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
@@ -19,8 +11,6 @@ export async function fetchRevenue() {
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await knex('revenue').select('*');
-
-    console.log('Data fetch completed after 3 seconds.');
 
     return data;
   } catch (error) {
@@ -114,7 +104,7 @@ export async function fetchFilteredInvoices(
       )
       .join('customers', 'invoices.customer_id', '=', 'customers.id')
       .whereRaw(
-        'customers.name ILIKE ? OR customers.email ILIKE ? OR invoices.amount::text ILIKE ? OR invoices.date::text ILIKE ? OR invoices.status ILIKE ?',
+        'customers.name LIKE ? OR customers.email LIKE ? OR CAST(`invoices`.`amount` AS CHAR) LIKE ? OR CAST(`invoices`.`date` AS CHAR) LIKE ? OR invoices.status LIKE ?',
         [`%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`],
       )
       .orderBy('invoices.date', 'desc')
@@ -135,7 +125,7 @@ export async function fetchInvoicesPages(query: string) {
     const count = await knex('invoices')
       .join('customers', 'invoices.customer_id', '=', 'customers.id')
       .whereRaw(
-        'customers.name ILIKE ? OR customers.email ILIKE ? OR invoices.amount::text ILIKE ? OR invoices.date::text ILIKE ? OR invoices.status ILIKE ?',
+        'customers.name LIKE ? OR customers.email LIKE ? OR CAST(`invoices`.`amount` AS CHAR) LIKE ? OR CAST(`invoices`.`date` AS CHAR) LIKE ? OR invoices.status LIKE ?',
         [`%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`],
       )
       .count('* as count')
@@ -210,7 +200,7 @@ export async function fetchFilteredCustomers(query: string) {
         ),
       )
       .leftJoin('invoices', 'customers.id', '=', 'invoices.customer_id')
-      .whereRaw('customers.name ILIKE ? OR customers.email ILIKE ?', [
+      .whereRaw('customers.name LIKE ? OR customers.email LIKE ?', [
         `%${query}%`,
         `%${query}%`,
       ])
