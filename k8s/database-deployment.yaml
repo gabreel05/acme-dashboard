@@ -20,6 +20,9 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3306
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
         env:
         - name: MYSQL_DATABASE
           valueFrom:
