@@ -8,5 +8,6 @@ spec:
       storage: 1Gi
   volumeMode: Filesystem
   volumeName: database-pv
+  storageClassName: "" 
   accessModes:
     - ReadWriteOnce
