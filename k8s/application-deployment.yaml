@@ -25,25 +25,25 @@ spec:
         - name: AUTH_SECRET
           valueFrom:
             secretKeyRef:
-              name: AUTH_SECRET
+              name: auth_secret
               key: AUTH_SECRET 
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: DB_HOST
+              name: db_host
               key: DB_HOST 
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: DB_NAME
+              name: db_name
               key: DB_NAME 
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: DB_USER
+              name: db_user
               key: DB_USER
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: DB_PASSWORD
+              name: db_password
               key: DB_PASSWORD
