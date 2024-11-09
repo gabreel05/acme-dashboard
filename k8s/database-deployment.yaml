@@ -44,7 +44,7 @@ spec:
               key: MYSQL_PASSWORD
         volumeMounts:
         - name: database-storage
-          mountPath: /var/lib/acme-database
+          mountPath: /var/lib/mysql
       volumes:
       - name: database-storage
         persistentVolumeClaim:
