@@ -52,6 +52,10 @@ pipeline {
     stage('Docker build') {
       steps {
         sh 'docker build --no-cache -t gabreel05/acme-application:latest .'
+      }
+    }
+    stage('Docker push') {
+      steps {
         sh 'docker push gabreel05/acme-application:latest'
       }
     }
