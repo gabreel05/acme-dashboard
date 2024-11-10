@@ -53,19 +53,33 @@ pipeline {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-              sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
+              sh('docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD')
           }
         }
       }
     }
-    stage('Docker build') {
+    stage('Docker build - Application') {
       steps {
         sh 'docker build --no-cache -t gabreel05/acme-application:latest .'
       }
     }
-    stage('Docker push') {
+    stage('Docker push - Application') {
       steps {
         sh 'docker push gabreel05/acme-application:latest'
+      }
+    }
+    stage('Docker build - Database') {
+      steps {
+        dir('acme-dashboard/database') {
+          sh 'docker build --no-cache -t gabreel05/acme-database:latest .'
+        }
+      }
+    }
+    stage('Docker push - Database') {
+      steps {
+        dir('acme-dashboard/database') {
+          sh 'docker push gabreel05/acme-database:latest'
+        }
       }
     }
   }
