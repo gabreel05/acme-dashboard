@@ -35,6 +35,7 @@ pipeline {
             dir('k8s') {
               sh 'microk8s kubectl apply -f database-secrets.yaml'
               sh 'microk8s kubectl apply -f database-pv.yaml'
+              sh 'microk8s kubectl apply -f database-pvc.yaml'
               sh 'microk8s kubectl apply -f database-ss.yaml'
               sh 'microk8s kubectl apply -f database-service.yaml'
             }
