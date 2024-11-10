@@ -18,6 +18,7 @@ pipeline {
 
     stage('SCA') {
       steps {
+        sh 'snyk auth --auth-type=token $SNYK_TOKEN'
         sh 'snyk test'
       }
     }
