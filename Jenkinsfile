@@ -49,6 +49,15 @@ pipeline {
         }
       }
     }
+    stage('Docker Login') {
+      steps {
+        script {
+          withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+              sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
+          }
+        }
+      }
+    }
     stage('Docker build') {
       steps {
         sh 'docker build --no-cache -t gabreel05/acme-application:latest .'
