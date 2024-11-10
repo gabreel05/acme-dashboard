@@ -15,5 +15,11 @@ pipeline {
         sh 'npm install'
       }
     }
+
+    stage('SCA') {
+      steps {
+        sh 'snyk test'
+      }
+    }
   }
 }
