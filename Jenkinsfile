@@ -82,5 +82,16 @@ pipeline {
         }
       }
     }
+    stage('Kubernetes') {
+      steps {
+        script {
+          withCredentials([file(credentialsId: 'KUBE_CONFIG', variable: 'KUBE_CONFIG')]) {
+            dir('k8s') {
+              sh 'microk8s status --wait-ready'
+            }
+          }
+        }
+      }
+    }
   }
 }
