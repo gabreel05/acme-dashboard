@@ -4,7 +4,7 @@ pipeline {
   tools {nodejs "NodeJS 18.20.4"}
 
   environment {
-      SNYK_TOKEN= credentials('SNYK_TOKEN')
+      SNYK_TOKEN=credentials('SNYK_TOKEN')
   }
 
   stages {
