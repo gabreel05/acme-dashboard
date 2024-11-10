@@ -5,7 +5,7 @@ pipeline {
 
   environment {
       SNYK_TOKEN= credentials('SNYK_TOKEN')
-    }
+  }
 
   stages {
     stage('Checkout') {
@@ -47,6 +47,12 @@ pipeline {
         failure {
             error 'Snyk SAST failed, stopping the build.'
         }
+      }
+    }
+    stage('Docker build') {
+      steps {
+        sh 'docker build --no-cache -t gabreel05/acme-application:latest .'
+        sh 'docker push gabreel05/acme-application:latest'
       }
     }
   }
