@@ -28,20 +28,20 @@ pipeline {
         }
       }
     }
-    stage('Kubernetes - Database') {
-      steps {
-        script {
-          withCredentials([file(credentialsId: 'KUBE_CONFIG', variable: 'KUBE_CONFIG')]) {
-            dir('k8s') {
-              sh 'microk8s kubectl apply -f database-secrets.yaml'
-              sh 'microk8s kubectl apply -f database-pv.yaml'
-              sh 'microk8s kubectl apply -f database-pvc.yaml'
-              sh 'microk8s kubectl apply -f database-ss.yaml'
-              sh 'microk8s kubectl apply -f database-service.yaml'
-            }
-          }
-        }
-      }
-    }
+    // stage('Kubernetes - Database') {
+    //   steps {
+    //     script {
+    //       withCredentials([file(credentialsId: 'KUBE_CONFIG', variable: 'KUBE_CONFIG')]) {
+    //         dir('k8s') {
+    //           sh 'microk8s kubectl apply -f database-secrets.yaml'
+    //           sh 'microk8s kubectl apply -f database-pv.yaml'
+    //           sh 'microk8s kubectl apply -f database-pvc.yaml'
+    //           sh 'microk8s kubectl apply -f database-ss.yaml'
+    //           sh 'microk8s kubectl apply -f database-service.yaml'
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
