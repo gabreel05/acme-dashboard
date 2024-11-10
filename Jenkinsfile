@@ -3,6 +3,10 @@ pipeline {
 
   tools {nodejs "NodeJS 18.20.4"}
 
+  environment {
+      SNYK_TOKEN= credentials('SNYK_TOKEN')
+    }
+
   stages {
     stage('Checkout') {
       steps {
