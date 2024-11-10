@@ -70,14 +70,14 @@ pipeline {
     }
     stage('Docker build - Database') {
       steps {
-        dir('acme-dashboard/database') {
+        dir('database') {
           sh 'docker build --no-cache -t gabreel05/acme-database:latest .'
         }
       }
     }
     stage('Docker push - Database') {
       steps {
-        dir('acme-dashboard/database') {
+        dir('database') {
           sh 'docker push gabreel05/acme-database:latest'
         }
       }
