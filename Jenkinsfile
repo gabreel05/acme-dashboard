@@ -25,12 +25,28 @@ pipeline {
         sh 'snyk auth --auth-type=token $SNYK_TOKEN'
         sh 'snyk test'
       }
+      post {
+        success {
+            echo 'Snyk SCA analysis completed successfully.'
+        }
+        failure {
+            error 'Snyk SCA failed, stopping the build.'
+        }
+      }
     }
 
     stage('SAST') {
       steps {
         sh 'snyk auth --auth-type=token $SNYK_TOKEN'
         sh 'snyk code test -d'
+      }
+      post {
+        success {
+            echo 'Snyk SAST analysis completed successfully.'
+        }
+        failure {
+            error 'Snyk SAST failed, stopping the build.'
+        }
       }
     }
   }
