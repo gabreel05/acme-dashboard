@@ -23,7 +23,6 @@ pipeline {
         sh 'snyk auth --auth-type=token $SNYK_TOKEN'
         sh 'snyk test'
       }
-      }
     }
     stage('SAST') {
       steps {
@@ -110,4 +109,4 @@ pipeline {
       }
     }
   }
-
+}
