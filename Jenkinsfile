@@ -89,8 +89,8 @@ pipeline {
               sh 'microk8s kubectl delete -n default persistentvolumeclaim --all --ignore-not-found=true'
               sh 'microk8s kubectl delete -n default service database-service --ignore-not-found=true'
               sh 'microk8s kubectl delete -n default secret database-secrets --ignore-not-found=true'
-              sh 'microk8s kubectl delete -n default secret application-deployment --ignore-not-found=true'
-              sh 'microk8s kubectl delete -n default secret application-service --ignore-not-found=true'
+              sh 'microk8s kubectl delete -n default secret application --ignore-not-found=true'
+              sh 'microk8s kubectl delete -n default secret application --ignore-not-found=true'
               sh 'microk8s kubectl delete -n default secret application-secrets --ignore-not-found=true'
             }
           }
