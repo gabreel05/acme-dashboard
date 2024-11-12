@@ -111,7 +111,7 @@ pipeline {
         }
       }
     }
-        stage('Kubernetes - Application') {
+    stage('Kubernetes - Application') {
       steps {
         script {
           withCredentials([file(credentialsId: 'KUBE_CONFIG', variable: 'KUBE_CONFIG')]) {
